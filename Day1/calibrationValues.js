@@ -1,18 +1,3 @@
-/**
- * 
-PLAN: 
-
-- FileReader API - reads contents of a file as text. 
-- The contents of the file are lines of text
-- Read through each line of text and take the first number in the sequence and the last number in the sequence.
-- Concat the first and last numbers
-- Push the concacted numbers to an array
-- move to the next line and do the same
-- once you've reached the end of the file
-- reduce the array of the concacted numbers to a sum
-- return this sum. 
-
- */
 const fs = require('node:fs/promises');
 
 const calibrationValues = async () => {
@@ -20,7 +5,7 @@ const calibrationValues = async () => {
     const data = await fs.readFile('./Day1/input.txt', { encoding: 'utf8' });
     const splitDataByLine = data.split('\n');
     const splitLinesByWords = splitDataByLine.split(' ');
-    console.log(splitLinesByWords);
+    console.log(splitDataByWords);
     const extractedNumbersFromData = [];
 
     console.log(splitDataByLine.match(/[0-9]+/));
@@ -30,7 +15,6 @@ const calibrationValues = async () => {
       // loop through the charredArray
       // if parseInt(char) == Number
       // push char to extracted array
-
       const splitLineIntoChar = line.split('');
       console.log(splitLineIntoChar);
       const matchNumbers = /[0-9]+/;
@@ -49,5 +33,4 @@ const calibrationValues = async () => {
     console.error(err);
   }
 };
-
-console.log(calibrationValues());
+exports.calibrationValues = calibrationValues;
