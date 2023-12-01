@@ -13,3 +13,12 @@ PLAN:
 - return this sum. 
 
  */
+
+const fs = require('node:fs');
+
+fs.readFile('./Day1/input.txt', 'utf8', (err, data) => {
+  if (err) {
+    return 'Error: ' + err;
+  }
+  return data.split('\n');
+});
