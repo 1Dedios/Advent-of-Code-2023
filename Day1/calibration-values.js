@@ -40,10 +40,37 @@ const calibrationValues = async () => {
       }
     });
 
-    console.log(extractedNumbersFromData);
+    console.log(extractedNumbersFromData.length);
+
+    // TODO:
+    // loop through extractedNumbers and push the first element and the last element into firstAndLastNumberFromExtractedNumbers Array
+
+    for (let i = 0; i < extractedNumbersFromData.length; i++) {
+      console.log(extractedNumbersFromData[i]);
+      console.log(extractedNumbersFromData[0] == '\n');
+      if (i === extractedNumbersFromData.length - 1) {
+        firstAndLastNumberFromExtractedNumbers.push(
+          extractedNumbersFromData[i]
+        );
+      } else if (extractedNumbersFromData[i] == '\n') {
+        firstAndLastNumberFromExtractedNumbers.push(
+          extractedNumbersFromData[i + 1]
+        );
+      } else if (extractedNumbersFromData[i + 1] == '\n') {
+        firstAndLastNumberFromExtractedNumbers.push(
+          extractedNumbersFromData[i]
+        );
+      }
+    }
+
+    //firstAndLastNumberFromExtractedNumbers.push(extractedNumbersFromData[extractedNumbersFromData.length - 1])
+
+    console.log(firstAndLastNumberFromExtractedNumbers);
   } catch (err) {
     console.error(err);
   }
 };
 
 calibrationValues();
+
+// TODO: remove all console statements and unnecessary comments from code
