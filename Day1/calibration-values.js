@@ -11,6 +11,7 @@ const calibrationValues = async () => {
     const extractedNumbersFromData = [];
     const firstAndLastNumberFromExtractedNumbers = [];
 
+    // TODO: some of the written numbers were not read correctly - might have to replace starting with 9 and counting down
     splitDataByLine.forEach((line) => {
       const replaceOne = line.replace('one', 1);
       const replaceTwo = replaceOne.replace('two', 2);
@@ -23,10 +24,10 @@ const calibrationValues = async () => {
       const replaceNine = replaceEight.replace('nine', 9);
       const iterableArray = replaceNine.split(' ');
 
-      //console.log(iterableArray);
+      console.log(iterableArray);
 
       for (let i = 0; i < iterableArray.length; i++) {
-        // need to create some seperation between lines here
+        // need to create some separation between lines here
         if (i == 0) {
           extractedNumbersFromData.push('\n');
         }
@@ -42,7 +43,6 @@ const calibrationValues = async () => {
 
     console.log(extractedNumbersFromData.length);
 
-    // TODO:
     // loop through extractedNumbers and push the first element and the last element into firstAndLastNumberFromExtractedNumbers Array
 
     for (let i = 0; i < extractedNumbersFromData.length; i++) {
