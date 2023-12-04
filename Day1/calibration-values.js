@@ -1,3 +1,4 @@
+// Required to read the file
 const fs = require('node:fs/promises');
 
 const calibrationValues = async () => {
@@ -6,7 +7,7 @@ const calibrationValues = async () => {
       encoding: 'utf8',
     });
     const splitDataByLine = data.split('\n');
-    console.log(splitDataByLine);
+    //console.log(splitDataByLine);
     const extractedNumbersFromData = [];
     const firstAndLastNumberFromExtractedNumbers = [];
 
@@ -20,43 +21,26 @@ const calibrationValues = async () => {
       const replaceSeven = replaceSix.replace('seven', 7);
       const replaceEight = replaceSeven.replace('eight', 8);
       const replaceNine = replaceEight.replace('nine', 9);
-      const iterableArray = replaceNine.split('');
-      console.log(iterableArray);
+      const iterableArray = replaceNine.split(' ');
+
+      //console.log(iterableArray);
+
       for (let i = 0; i < iterableArray.length; i++) {
-        console.log(parseInt(iterableArray[i]));
-        if (parseInt(iterableArray[i]) === typeof Number) {
-          extractedNumbersFromData.push(parseInt(iterableArray[i]));
+        // need to create some seperation between lines here
+        if (i == 0) {
+          extractedNumbersFromData.push('\n');
+        }
+        for (let j = 0; j < iterableArray[i].length; j++) {
+          let parsedNumber = parseInt(iterableArray[i][j], 10);
+          console.log(parsedNumber);
+          if (!isNaN(parsedNumber)) {
+            extractedNumbersFromData.push(parsedNumber);
+          }
         }
       }
     });
 
     console.log(extractedNumbersFromData);
-
-    console.log(extractedNumbersFromData);
-
-    extractedNumbersFromData.forEach((element) => {
-      if (element.length === 1) {
-        firstAndLastNumberFromExtractedNumbers.push(element * 11);
-      } else if (element.length > 2) {
-        let firstDigit = element.charAt(0);
-        console.log(firstDigit);
-        let lastDigit = element.charAt(element.length - 1);
-        console.log(lastDigit);
-        firstAndLastNumberFromExtractedNumbers.push(
-          parseInt(firstDigit.concat(lastDigit))
-        );
-      } else {
-        firstAndLastNumberFromExtractedNumbers.push(parseInt(element));
-      }
-    });
-
-    console.log(
-      firstAndLastNumberFromExtractedNumbers.reduce((acc, val) => acc + val, 0)
-    );
-    return firstAndLastNumberFromExtractedNumbers.reduce(
-      (acc, val) => acc + val,
-      0
-    );
   } catch (err) {
     console.error(err);
   }
