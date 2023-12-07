@@ -7,41 +7,103 @@ const calibrationValues = async () => {
       encoding: 'utf8',
     });
     const splitDataByLine = data.split('\n');
-    //console.log(splitDataByLine);
+    console.log(splitDataByLine);
     const extractedNumbersFromData = [];
     const firstAndLastNumberFromExtractedNumbers = [];
+    console.log(parseInt('t'));
 
     // TODO: some of the written numbers were not read correctly - might have to replace starting with 9 and counting down
-    splitDataByLine.forEach((line) => {
-      const replaceOne = line.replace('one', 1);
-      const replaceTwo = replaceOne.replace('two', 2);
-      const replaceThree = replaceTwo.replace('three', 3);
-      const replaceFour = replaceThree.replace('four', 4);
-      const replaceFive = replaceFour.replace('five', 5);
-      const replaceSix = replaceFive.replace('six', 6);
-      const replaceSeven = replaceSix.replace('seven', 7);
-      const replaceEight = replaceSeven.replace('eight', 8);
-      const replaceNine = replaceEight.replace('nine', 9);
-      const iterableArray = replaceNine.split(' ');
 
-      console.log(iterableArray);
+    // create object for the lettered numbers making the words be the key
 
-      for (let i = 0; i < iterableArray.length; i++) {
-        // need to create some separation between lines here
-        if (i == 0) {
-          extractedNumbersFromData.push('\n');
-        }
-        for (let j = 0; j < iterableArray[i].length; j++) {
-          let parsedNumber = parseInt(iterableArray[i][j], 10);
-          console.log(parsedNumber);
-          if (!isNaN(parsedNumber)) {
-            extractedNumbersFromData.push(parsedNumber);
+    // need to iterate through the string
+    // need to filter for char or number
+
+    // if char maybe push to loop scoped array
+    // within if scope - if scoped array.length == 3 process that element
+    // element processing -  if object.hasownproperty('three char string')
+    // push extractednumbersfromdata.push(object[threecharstring])
+
+    // else if number push to extractedNumbersFromData
+
+    /************************************** */
+
+    // ITERATING THROUGH THE STRING METHOD
+
+    const numberLetters = {
+      one: 1,
+      two: 2,
+      three: 3,
+      four: 4,
+      five: 5,
+      six: 6,
+      seven: 7,
+      eight: 8,
+      nine: 9,
+    };
+
+    for (let i = 0; i < splitDataByLine.length; i++) {
+      let processingArray = [];
+      console.log(splitDataByLine[i]);
+      for (let j = 0; j < splitDataByLine[i].length; j++) {
+        console.log(splitDataByLine[i][j]);
+        console.log(parseInt(splitDataByLine[i][j]));
+        if (parseInt(splitDataByLine[i][j]) === NaN) {
+          processingArray.push(splitDataByLine[i][j]);
+          console.log(processingArray);
+          if (processingArray.length === 3) {
+            if (
+              processingArray[0] ===
+              numberLetters.hasownproperty(processingArray[0])
+            ) {
+              let wordToPush = processingArray[0];
+              extractedNumbersFromData.push(numberLetters[wordToPush]);
+              // clear the array
+              processingArray.length = 0;
+            } else {
+              continue;
+            }
           }
+        } else {
+          extractedNumbersFromData.push(parseInt(splitDataByLine[i][j]));
         }
       }
-    });
+    }
 
-    console.log(extractedNumbersFromData.length);
+    /************************************** */
+    // FOR EACH METHOD
+    // splitDataByLine.forEach((line) => {
+    //   const replaceNine = line.replace('nine', 9);
+    //   const replaceFive = replaceSix.replace('five', 5);
+    //   const replaceSix = replaceSeven.replace('six', 6);
+    //   const replaceSeven = replaceEight.replace('seven', 7);
+    //   const replaceOne = replaceTwo.replace('one', 1);
+    //   const replaceEight = replaceNine.replace('eight', 8);
+    //   const replaceFour = replaceFive.replace('four', 4);
+    //   const replaceThree = replaceFour.replace('three', 3);
+    //   const replaceTwo = replaceThree.replace('two', 2);
+    //   const iterableArray = replaceOne.split(' ');
+
+    //   console.log(iterableArray);
+
+    //   for (let i = 0; i < iterableArray.length; i++) {
+    //     // need to create some separation between lines here
+    //     if (i == 0) {
+    //       extractedNumbersFromData.push('\n');
+    //     }
+    //     for (let j = 0; j < iterableArray[i].length; j++) {
+    //       let parsedNumber = parseInt(iterableArray[i][j], 10);
+    //       console.log(parsedNumber);
+    //       if (!isNaN(parsedNumber)) {
+    //         extractedNumbersFromData.push(parsedNumber);
+    //       }
+    //     }
+    //   }
+    // });
+
+    /************************************** */
+
+    console.log(extractedNumbersFromData);
 
     // loop through extractedNumbers and push the first element and the last element into firstAndLastNumberFromExtractedNumbers Array
 
@@ -67,7 +129,7 @@ const calibrationValues = async () => {
 
     console.log(firstAndLastNumberFromExtractedNumbers);
   } catch (err) {
-    console.error(err);
+    throw new Error(err);
   }
 };
 
