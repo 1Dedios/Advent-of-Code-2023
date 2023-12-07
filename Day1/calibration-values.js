@@ -53,11 +53,15 @@ const calibrationValues = async () => {
         if (typeof element !== 'number') {
           processingArray.push(element);
           console.log(processingArray);
+          console.log(processingArray.join(''));
+          console.log(
+            processingArray.length === 3 &&
+              numberLetters.hasownproperty(processingArray.join(''))
+          );
 
           if (
             processingArray.length === 3 &&
-            processingArray[0] ===
-              numberLetters.hasownproperty(processingArray[0])
+            numberLetters.hasownproperty(processingArray.join(''))
           ) {
             let wordToPush = processingArray[0];
             extractedNumbersFromData.push(numberLetters[wordToPush]);
