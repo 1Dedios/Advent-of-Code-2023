@@ -10,7 +10,6 @@ const calibrationValues = async () => {
     console.log(splitDataByLine);
     const extractedNumbersFromData = [];
     const firstAndLastNumberFromExtractedNumbers = [];
-    console.log(parseInt('t'));
 
     // TODO: some of the written numbers were not read correctly - might have to replace starting with 9 and counting down
 
@@ -29,6 +28,7 @@ const calibrationValues = async () => {
     /************************************** */
 
     // ITERATING THROUGH THE STRING METHOD
+    //console.log('t'.isNaN());
 
     const numberLetters = {
       one: 1,
@@ -45,24 +45,26 @@ const calibrationValues = async () => {
     for (let i = 0; i < splitDataByLine.length; i++) {
       let processingArray = [];
       console.log(splitDataByLine[i]);
+
       for (let j = 0; j < splitDataByLine[i].length; j++) {
-        console.log(splitDataByLine[i][j]);
-        console.log(parseInt(splitDataByLine[i][j]));
-        if (parseInt(splitDataByLine[i][j]) === NaN) {
-          processingArray.push(splitDataByLine[i][j]);
+        let element = splitDataByLine[i][j];
+        console.log(element);
+
+        if (typeof element !== 'number') {
+          processingArray.push(element);
           console.log(processingArray);
-          if (processingArray.length === 3) {
-            if (
-              processingArray[0] ===
+
+          if (
+            processingArray.length === 3 &&
+            processingArray[0] ===
               numberLetters.hasownproperty(processingArray[0])
-            ) {
-              let wordToPush = processingArray[0];
-              extractedNumbersFromData.push(numberLetters[wordToPush]);
-              // clear the array
-              processingArray.length = 0;
-            } else {
-              continue;
-            }
+          ) {
+            let wordToPush = processingArray[0];
+            extractedNumbersFromData.push(numberLetters[wordToPush]);
+            // clear the array
+            processingArray.length = 0;
+          } else {
+            continue;
           }
         } else {
           extractedNumbersFromData.push(parseInt(splitDataByLine[i][j]));
