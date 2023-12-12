@@ -1,5 +1,6 @@
 // Required to read the file
 const fs = require('node:fs/promises');
+const { number } = require('yargs');
 
 const calibrationValues = async () => {
   try {
@@ -56,22 +57,25 @@ const calibrationValues = async () => {
           console.log(processingArray.join(''));
           console.log(
             processingArray.length === 3 &&
-              numberLetters.hasownproperty(processingArray.join(''))
+              numberLetters.hasOwnProperty(processingArray.join(''))
           );
 
           if (
             processingArray.length === 3 &&
-            numberLetters.hasownproperty(processingArray.join(''))
+            numberLetters.hasOwnProperty(processingArray.join(''))
           ) {
-            let wordToPush = processingArray[0];
+            console.log(processingArray);
+            let wordToPush = processingArray.join('');
+            console.log(wordToPush);
+            console.log(numberLetters[wordToPush]);
             extractedNumbersFromData.push(numberLetters[wordToPush]);
             // clear the array
             processingArray.length = 0;
-          } else {
+            console.log(processingArray);
             continue;
           }
         } else {
-          extractedNumbersFromData.push(parseInt(splitDataByLine[i][j]));
+          extractedNumbersFromData.push(parseInt(element));
         }
       }
     }
